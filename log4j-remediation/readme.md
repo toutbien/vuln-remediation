@@ -5,13 +5,13 @@ This repository contains automated remediation scripts and configurations for ad
 
 # Project Scope
 
-# Target Infrastructure: Windows Server 2016 VMs
-# Primary Vulnerabilities: Apache Log4j 1.x, Log4j EOL components
-# Automation Tools: Puppet Enterprise, Bitbucket Pipelines, Git-based deployment
-# Priority: Critical security remediation (CVE-2021-44228, CVE-2021-45046)
+Target Infrastructure: Windows Server 2016 VMs
+Primary Vulnerabilities: Apache Log4j 1.x, Log4j EOL components
+Automation Tools: Puppet Enterprise, Bitbucket Pipelines, Git-based deployment
+Priority: Critical security remediation (CVE-2021-44228, CVE-2021-45046)
 
 Repository Structure
-log4j-remediation/
+<code>log4j-remediation/
 ├── README.md
 ├── manifests/                    # Puppet manifests
 │   ├── log4j_scanner.pp         # Discovery and inventory
@@ -32,6 +32,7 @@ log4j-remediation/
 ├── hiera/                       # Puppet hierarchical data
 │   └── log4j_inventory.yaml     # Per-node configuration
 └── bitbucket-pipelines.yml      # CI/CD pipeline configuration
+</code>
 
 # Deployment Methods
 Method 1: Puppet Enterprise (Recommended)
@@ -68,10 +69,10 @@ Prerequisites
 
 # Inventory Collection
 Before deployment, run the discovery script to populate VM-specific data:
-.\scripts\find_log4j.ps1 -OutputPath .\data\$env:COMPUTERNAME.json
+<code>.\scripts\find_log4j.ps1 -OutputPath .\data\$env:COMPUTERNAME.json</code>
 
 # Deploy via Puppet
-puppet job run --nodes @log4j_affected_nodes
+<code>puppet job run --nodes @log4j_affected_nodes</code>
 
 # Success Criteria
 
@@ -81,10 +82,10 @@ puppet job run --nodes @log4j_affected_nodes
 [] No service disruptions reported
 
 # Verify updates applied
-.\scripts\validate_update.ps1 -ReportPath C:\Logs\validation_report.json
+<code>.\scripts\validate_update.ps1 -ReportPath C:\Logs\validation_report.json</code>
 
 # Check service status
-Get-Service | Where-Object {$_.Name -in $affectedServices} | Select-Object Name, Status
+<code>Get-Service | Where-Object {$_.Name -in $affectedServices} | Select-Object Name, Status</code>
 
 # Rollback Procedures
 1. Stop affected services
@@ -94,18 +95,18 @@ Get-Service | Where-Object {$_.Name -in $affectedServices} | Select-Object Name,
 
 ========= QUICK START =========
 - CLone repo
-git clone https://bitbucket.org/company/log4j-remediation.git
-cd log4j-remediation
+<code> git clone https://bitbucket.org/company/log4j-remediation.git</code>
+<code> cd log4j-remediation</code>
 
 Run discovery test on VM
-.\scripts\find_log4j.ps1 -Verbose
+<code>.\scripts\find_log4j.ps1 -Verbose</code>
 
 Deploy to group
-git checkout feature/pilot-deployment
-git push origin feature/pilot-deployment
+<code>git checkout feature/pilot-deployment</code>
+<code>git push origin feature/pilot-deployment</code>
 
 Monitor deployment
-puppet job show <job-id>
+<code>puppet job show <job-id></code>
 
 --------------------------
 # Troubleshooting
