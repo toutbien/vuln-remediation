@@ -1,0 +1,11 @@
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Deploy Log4j Updates
+          script:
+            - git archive --format=tar.gz HEAD > log4j-update.tar.gz
+            - scp log4j-update.tar.gz deploy@puppet-master:/tmp/
+            - ssh deploy@puppet-master "cd /tmp && tar -xzf log4j-update.tar.gz"
+            - ssh deploy@puppet-master "r10k deploy environment production --verbose"
+            - ssh deploy@puppet-master "puppet job run --nodes @log4j_affected_nodes"
