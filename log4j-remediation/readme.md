@@ -95,18 +95,25 @@ Before deployment, run the discovery script to populate VM-specific data:
 
 ========= QUICK START =========
 - CLone repo
+
 <code> git clone https://bitbucket.org/company/log4j-remediation.git</code>
+
 <code> cd log4j-remediation</code>
 
 Run discovery test on VM
+
 <code>.\scripts\find_log4j.ps1 -Verbose</code>
 
 Deploy to group
+
 <code>git checkout feature/pilot-deployment</code>
+
 <code>git push origin feature/pilot-deployment</code>
 
 Monitor deployment
+
 <code>puppet job show <job-id></code>
+
 
 --------------------------
 # Troubleshooting
@@ -120,3 +127,4 @@ Git pull fails: Check network connectivity and repository access
 # Support
 For issues or questions, create a ticket in our internal tracking system or contact the DevOps team directly.
 
+c.2025
