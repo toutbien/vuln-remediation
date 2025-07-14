@@ -1,0 +1,5 @@
+// add your paths here
+Host,Log4jPath
+10.0.1.5,C:\Apps\ServiceA\lib\log4j-core-2.17.1.jar
+10.0.1.6,C:\Apache\lib\log4j-core-2.14.0.jar
+10.0.1.7,C:\App\lib\log4j-core-2.21.0.jar
